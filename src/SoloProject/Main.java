@@ -23,8 +23,9 @@ public class Main {
 			System.out.println("8. Exit");
 			
 			int a= sca.nextInt();
-			
-			if(a==1) {
+			switch (a){
+		
+			case 1:
 				boolean condition1= true;
 				while(condition1) {
 				System.out.println("1. Load Data");
@@ -33,7 +34,10 @@ public class Main {
 				System.out.println("4. Go Back");
 				
 				int b= sca.nextInt();
-				if(b==1) {
+				switch (b) {
+				case 1:
+					
+					try {
 					System.out.println("Enter number of items: ");
 					int no= sca.nextInt();
 					
@@ -42,16 +46,31 @@ public class Main {
 						String items= sca.next();
 						
 					}
-				}
+					
+					}catch (Exception e) {
+						System.out.println("Error...");
+						 e.printStackTrace();					
+						 }		
+					break;
 				
-				if(b==2) {
+				
+				
+				
+				case 2:
 					System.out.println("Enter shop name: ");
 					String shopName= sca.next();
 					myStack.push(shopName);
 					
-				}
+					break;
+
 				
-				if(b==3) {
+				
+				
+				
+				
+				case 3:
+					
+					try {
 					System.out.println("Entet tel NO: ");
 					int telNo= sca.nextInt();
 					String tel= Integer.toString(telNo);
@@ -70,20 +89,35 @@ public class Main {
 					String website= sca.next();
 					myStack.push(website);
 					
-							
+					}catch (Exception e) {
+						System.out.println("Error...");
+						 e.printStackTrace();					
+						 }	
 					
-				}
+					break;
+
 				
-				if(b==4) {
+				
+				
+				
+				
+				case 4:
 					
 					condition1= false;
+					break;
+
 				}
-				}
+				
 			}
 			
-			if(a==2) {
+				break;
+
+			
+			
+			case 2:
 				
 				boolean condition2= true;
+				while(condition2) {
 				System.out.println("1. Add items");
 				System.out.println("2. Delete items");
 				System.out.println("3. Change Item Price");
@@ -91,54 +125,114 @@ public class Main {
 				System.out.println("5. Go Back");
 				
 				int c= sca.nextInt();
-				if(c== 1) {
+				switch (c) {
+				case 1:
 					
-				}
 				
-				if(c== 2) {
 					
-				}
+					break;
+
 				
-				if(c== 3) {
+				case 2:
+				
 					
-				}
-				
-				if(c== 4) {
 					
-				}
-				
-				if(c== 5) {
+					break;
+
+					
+					
+				case 3:
+					
+					
+					break;
+
+					
+				case 4:
+					
+					break;
+
+					
+					
+				case 5:
 					
 					condition2= false;
+					break;
+
 				}
+			
 			}
+			
+				break;
 
 			
-			if(a==3) {
+			
+			
+			case 3:
 				
+				try {
+				System.out.print("Please enter customer name: ");
+				String customerName= sca.next();
+				System.out.print("Please enter customer phone number: ");
+				int phoneNumber= sca.nextInt();
+				System.out.print("Please enter invoice date: ");
+				char invoiceDate= sca.next().charAt(0);
+				
+			}catch (Exception e) {
+				System.out.println("Error...");
+				 e.printStackTrace();
 			}
 			
-			if(a==4) {
-				
-			}
+				break;
+
 			
-			if(a==5) {}
 			
-			if(a==6) {
-				
-			}
 			
-			if(a==7) {
-				
-			}
+			case 4:
+			
+			
+				break;
+
+			
+			
+			
+			case 5:
+			
+			
+			
+				break;
+
+			
+			case 6:
+			
+			
+				break;
+
+			
+			
+			case 7:
+			
+			
+				break;
+
+			
+			
+			case 8:
+				condition= false;
+				break;
+
 		}
 		
+		
+		
+		
+		 System.out.println(myStack);
 		
 	
 		
 		
+	
+		}
 	}
-
 }
 
 
