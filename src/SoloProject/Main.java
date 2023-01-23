@@ -121,6 +121,12 @@ public class Main {
 			if(a==4) {
 				
 			}
+			
+			if(a==5) {}
+			
+			if(a==6) {
+				
+			}
 		}
 		
 		
