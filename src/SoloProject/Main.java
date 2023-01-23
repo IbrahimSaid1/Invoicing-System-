@@ -5,17 +5,21 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
+
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
 
-		
+
 		Product obj1= new Product();
 		Scanner sca= new Scanner(System.in);
 		Stack<String> myStack= new Stack<>();
+		Stack<String> myStack1= new Stack<>();
+
 		
 		boolean condition =true;
 		while(condition) {
@@ -137,6 +141,7 @@ public class Main {
 				switch (c) {
 				case 1:
 					try {
+						
 					System.out.println("Enter number of items: ");
 					int no= sca.nextInt();
 					
@@ -144,19 +149,24 @@ public class Main {
 						 System.out.println("Entert product name: ");
 							String productName= sca.next();
 							obj1.setProductName(productName); 
-					
+							myStack1.push("Name: "+productName);
 							
 							System.out.println("Entert product ID: ");
 							int productId= sca.nextInt();
 							obj1.setProductId(productId);
-						
+							String id= Integer.toString(productId);
+							myStack1.push("ID: "+id);
+
 
 							System.out.println("Entert product price: ");
 							Double productPrice= sca.nextDouble();
 							obj1.setProductPrice(productPrice);
+							String price= Double.toString(productPrice);
+							myStack1.push("Price: "+price);
 							
-
+						
 					 }
+					 
 					 
 					 FileOutputStream file = new FileOutputStream("Product.txt");
 					 ObjectOutputStream out = new ObjectOutputStream(file);
@@ -164,24 +174,20 @@ public class Main {
 					 out.close();
 					 file.close();
 					 
-					}catch (Exception e) {
+					}catch (IOException e) {
 							System.out.println("Error...");
 							 e.printStackTrace();	
 											}
-					 
-				
-					
-					
-					
-					
-				
+		
 					
 					break;
 
 				
 				case 2:
 				
-					
+					System.out.print("Enter number of item you want to remove it: ");
+					int delete= sca.nextInt();
+					myStack1.removeElementAt(delete);
 					
 					break;
 
@@ -194,7 +200,8 @@ public class Main {
 
 					
 				case 4:
-					
+					System.out.println("Report all items: ");
+					System.out.println(myStack1);
 					break;
 
 					
