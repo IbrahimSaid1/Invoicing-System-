@@ -1,8 +1,10 @@
 package SoloProject;
 
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -10,6 +12,8 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 
+		
+		Product obj1= new Product();
 		Scanner sca= new Scanner(System.in);
 		Stack<String> myStack= new Stack<>();
 		
@@ -132,6 +136,43 @@ public class Main {
 				int c= sca.nextInt();
 				switch (c) {
 				case 1:
+					try {
+					System.out.println("Enter number of items: ");
+					int no= sca.nextInt();
+					
+					 for(int j=0; j< no; j++) {
+						 System.out.println("Entert product name: ");
+							String productName= sca.next();
+							obj1.setProductName(productName); 
+					
+							
+							System.out.println("Entert product ID: ");
+							int productId= sca.nextInt();
+							obj1.setProductId(productId);
+						
+
+							System.out.println("Entert product price: ");
+							Double productPrice= sca.nextDouble();
+							obj1.setProductPrice(productPrice);
+							
+
+					 }
+					 
+					 FileOutputStream file = new FileOutputStream("Product.txt");
+					 ObjectOutputStream out = new ObjectOutputStream(file);
+					 out.writeObject(obj1);
+					 out.close();
+					 file.close();
+					 
+					}catch (Exception e) {
+							System.out.println("Error...");
+							 e.printStackTrace();	
+											}
+					 
+				
+					
+					
+					
 					
 				
 					
