@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -149,7 +148,7 @@ public class Main {
 						 System.out.println("Entert product name: ");
 							String productName= sca.next();
 							obj1.setProductName(productName); 
-							myStack1.push("Name: "+productName);
+							myStack1.push("Product: "+productName);
 							
 							System.out.println("Entert product ID: ");
 							int productId= sca.nextInt();
@@ -185,7 +184,7 @@ public class Main {
 				
 				case 2:
 				
-					System.out.print("Enter number of item you want to remove it: ");
+					System.out.print("Enter index number of item you want to remove it: ");
 					int delete= sca.nextInt();
 					myStack1.removeElementAt(delete);
 					
@@ -194,16 +193,31 @@ public class Main {
 					
 					
 				case 3:
+					System.out.print("Enter index number of the price of item you want to change it: ");
+					int itemToChange= sca.nextInt();
+					myStack1.removeElementAt(itemToChange);
 					
+					System.out.println("Entert new product price: ");
+					Double productPrice= sca.nextDouble();
+					obj1.setProductPrice(productPrice);
+					String newValue= Double.toString(productPrice);
+					myStack1.push("Price: "+newValue);
+					
+
 					
 					break;
 
+					
+					
 					
 				case 4:
 					System.out.println("Report all items: ");
 					System.out.println(myStack1);
 					break;
 
+					
+					
+					
 					
 					
 				case 5:
@@ -218,6 +232,10 @@ public class Main {
 				break;
 
 			
+				
+				
+				
+				
 			
 			
 			case 3:
