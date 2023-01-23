@@ -1,18 +1,21 @@
 package SoloProject;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		Scanner sca= new Scanner(System.in);
 		Stack<String> myStack= new Stack<>();
 		
 		boolean condition =true;
 		while(condition) {
-			
+			BufferedWriter writer = new BufferedWriter(new FileWriter("Data.txt"));
 			System.out.println("1. Shop Settings");
 			System.out.println("2. Manage Shop Items");
 			System.out.println("3. Create New Invoice");
@@ -50,7 +53,8 @@ public class Main {
 					}catch (Exception e) {
 						System.out.println("Error...");
 						 e.printStackTrace();					
-						 }		
+						 }	
+					
 					break;
 				
 				
@@ -59,7 +63,7 @@ public class Main {
 				case 2:
 					System.out.println("Enter shop name: ");
 					String shopName= sca.next();
-					myStack.push(shopName);
+					myStack.push("                      "+shopName);
 					
 					break;
 
@@ -88,6 +92,7 @@ public class Main {
 					System.out.println("Entet website: ");
 					String website= sca.next();
 					myStack.push(website);
+					myStack.push("-------------------------------------------------------------------");
 					
 					}catch (Exception e) {
 						System.out.println("Error...");
@@ -225,8 +230,11 @@ public class Main {
 		
 		
 		
-		 System.out.println(myStack);
-		
+			for (String list : myStack)
+			 {
+			 writer.write("\n"+list);
+			 }
+			 writer.close();		
 	
 		
 		
