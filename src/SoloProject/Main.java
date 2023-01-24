@@ -13,6 +13,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 
+		int invoiceNo = 0;
 		Invoice obj= new Invoice();
 		Scanner sca= new Scanner(System.in);
 		Stack<String> myStack= new Stack<>();
@@ -57,21 +58,8 @@ public class Main {
 				switch (b) {
 				case 1:
 					
-					try {
-					System.out.println("Enter number of items: ");
-					int no= sca.nextInt();
-					
-					System.out.println("Enter items: ");
-					for(int i=0; i<=no; i++) {
-						String items= sca.next();
-						
-					}
-					
-					}catch (Exception e) {
-						System.out.println("Error...");
-						 e.printStackTrace();					
-						 }	
-					
+				System.out.println(myStack);
+				System.out.println(myStack1);	
 					break;
 				
 				
@@ -80,7 +68,7 @@ public class Main {
 				case 2:
 					System.out.println("Enter shop name: ");
 					String shopName= sca.next();
-					myStack.push("                      "+shopName);
+					myStack1.push("                      "+shopName);
 					
 					break;
 
@@ -95,21 +83,21 @@ public class Main {
 					System.out.println("Entet tel NO: ");
 					int telNo= sca.nextInt();
 					String tel= Integer.toString(telNo);
-					myStack.push(tel);
+					myStack1.push("Tel"+tel);
 					
 					System.out.println("Entet fax NO: ");
 					int faxNo= sca.nextInt();
 					String fax= Integer.toString(faxNo);
-					myStack.push(fax);
+					myStack1.push("Fax"+fax);
 					
 					System.out.println("Entet email: ");
 					String email= sca.next();
-					myStack.push(email);
+					myStack1.push("Email"+email);
 					
 					System.out.println("Entet website: ");
 					String website= sca.next();
-					myStack.push(website);
-					myStack.push("-------------------------------------------------------------------");
+					myStack1.push("Website"+website);
+					myStack1.push("-------------------------------------------------------------------");
 					
 					}catch (Exception e) {
 						System.out.println("Error...");
@@ -159,20 +147,20 @@ public class Main {
 						 System.out.println("Entert product name: ");
 							String productName= sca.next();
 							obj.obj1.setProductName(productName); 
-							myStack1.push("Product: "+productName);
+							myStack.push("Product: "+productName);
 							
 							System.out.println("Entert product ID: ");
 							int productId= sca.nextInt();
 							obj.obj1.setProductId(productId);
 							String id= Integer.toString(productId);
-							myStack1.push("ID: "+id);
+							myStack.push("ID: "+id);
 
 
 							System.out.println("Entert product price: ");
 							Double productPrice= sca.nextDouble();
 							obj.obj1.setProductPrice(productPrice);
 							String price= Double.toString(productPrice);
-							myStack1.push("Price: "+price);
+							myStack.push("Price: "+price);
 							
 						
 					 }
@@ -197,7 +185,7 @@ public class Main {
 				
 					System.out.print("Enter index number of item you want to remove it: ");
 					int delete= sca.nextInt();
-					myStack1.removeElementAt(delete);
+					myStack.removeElementAt(delete);
 					
 					break;
 
@@ -206,13 +194,13 @@ public class Main {
 				case 3:
 					System.out.print("Enter index number of the price of item you want to change it: ");
 					int itemToChange= sca.nextInt();
-					myStack1.removeElementAt(itemToChange);
+					myStack.removeElementAt(itemToChange);
 					
 					System.out.println("Entert new product price: ");
 					Double productPrice= sca.nextDouble();
 					obj.obj1 .setProductPrice(productPrice);
 					String newValue= Double.toString(productPrice);
-					myStack1.push("Price: "+newValue);
+					myStack.push("Price: "+newValue);
 					
 
 					
@@ -223,7 +211,7 @@ public class Main {
 					
 				case 4:
 					System.out.println("Report all items: ");
-					System.out.println(myStack1);
+					System.out.println(myStack);
 					break;
 
 					
@@ -252,6 +240,13 @@ public class Main {
 			case 3:
 				Double total=0.0;
 				try {
+					
+				System.out.print("Please enter invoice NO: ");
+				invoiceNo= sca.nextInt();
+				obj.setInvoiceNo(invoiceNo);
+				String no= Integer.toString(invoiceNo);
+				myStack1.push("Invoice NO."+no);
+				
 				System.out.print("Please enter customer name: ");
 				String customerName= sca.next();
 				obj.setCustomerName(customerName);
@@ -297,13 +292,18 @@ public class Main {
 				
 				total= total+ productPrice*quantity;
 				
-
+				
 				}
 				String tot= Double.toString(total);
-				myStack1.push("The total peice: "+tot);
-				System.out.println("The total peice: "+total);
+				myStack1.push("The total peice: "+tot);	
 				System.out.println("-----------------------------------------------");
 
+				 for (String list: myStack1)
+				 {
+				 writer1.write("\n"+list);
+				 }
+				 writer1.close();
+				
 				 FileOutputStream file = new FileOutputStream("InvoiceSerialize.txt");
 				 ObjectOutputStream out = new ObjectOutputStream(file);
 				 out.writeObject(obj.obj1);
@@ -339,7 +339,21 @@ public class Main {
 
 			
 			case 6:
-			
+			try {
+				
+				System.out.print("Enter NO of invoice you want to found it: ");
+				int number= sca.nextInt();
+				if(number== invoiceNo) {
+					System.out.println(myStack1);
+				}
+				else {
+					System.out.println("Sorry This Invoice Does Not Found It.");
+				}
+				
+			}catch (Exception e) {
+				System.out.println("Error...");
+				 e.printStackTrace();
+			}
 				count6++;
 				break;
 
@@ -372,22 +386,15 @@ public class Main {
 		
 	
 		
+		
 			for (String list : myStack)
 			 {
 			 writer.write("\n"+list);
 			 }
-			 writer.close();	
-			 
-			 
-			 for (String list : myStack1)
-			 {
-			 writer1.write("\n"+list);
-			 }
-			 writer1.close();
-		
-		
+				writer.close();
 	
 		}
+		
 	}
 }
 

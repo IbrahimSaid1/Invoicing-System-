@@ -4,6 +4,7 @@ public class Invoice {
 	
 	Product obj1= new Product();
 	
+	private int invoiceNo;
 	private String customerName;
 	private int phoneNumber;
 	private String invoiceDate;
@@ -24,6 +25,12 @@ public class Invoice {
 	}
 	public void setInvoiceDate(String invoiceDate) {
 		this.invoiceDate = invoiceDate;
+	}
+	public int getInvoiceNo() {
+		return invoiceNo;
+	}
+	public void setInvoiceNo(int invoiceNo) {
+		this.invoiceNo = invoiceNo;
 	}
 	
 
