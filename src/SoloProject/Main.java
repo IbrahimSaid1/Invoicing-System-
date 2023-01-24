@@ -1,5 +1,6 @@
 package SoloProject;
 
+
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -19,6 +20,7 @@ public class Main {
 
 		Invoice obj= new Invoice();
 		Scanner sca= new Scanner(System.in);
+
 		Stack<String> myStack= new Stack<>();
 		Stack<String> myStack1= new Stack<>();
 		
@@ -33,10 +35,11 @@ public class Main {
 		int count6=0;
 		int count7=0;
 		int count8=0;
-
+		int count9=0;
+		
 		boolean condition =true;
 		while(condition) {
-			BufferedWriter writer = new BufferedWriter(new FileWriter("Data.txt"));
+			BufferedWriter writer = new BufferedWriter(new FileWriter("Product.txt"));
 			System.out.println("1. Shop Settings");
 			System.out.println("2. Manage Shop Items");
 			System.out.println("3. Create New Invoice");
@@ -86,21 +89,21 @@ public class Main {
 					System.out.println("Entet tel NO: ");
 					int telNo= sca.nextInt();
 					String tel= Integer.toString(telNo);
-					myStack1.push("Tel"+tel);
+					myStack1.push("Tel: "+tel);
 					
 					System.out.println("Entet fax NO: ");
 					int faxNo= sca.nextInt();
 					String fax= Integer.toString(faxNo);
-					myStack1.push("Fax"+fax);
+					myStack1.push("Fax: "+fax);
 					
 					System.out.println("Entet email: ");
 					String email= sca.next();
-					myStack1.push("Email"+email);
+					myStack1.push("Email: "+email);
 					
 					System.out.println("Entet website: ");
 					String website= sca.next();
-					myStack1.push("Website"+website);
-					myStack1.push("-------------------------------------------------------------------");
+					myStack1.push("Website: "+website);
+					myStack1.push("---------------------------------------------");
 					
 					}catch (Exception e) {
 						System.out.println("Error...");
@@ -169,7 +172,7 @@ public class Main {
 					 }
 					 
 					 
-					 FileOutputStream file = new FileOutputStream("Product.txt");
+					 FileOutputStream file = new FileOutputStream("ProductSerialize.txt");
 					 ObjectOutputStream out = new ObjectOutputStream(file);
 					 out.writeObject(obj.obj1);
 					 out.close();
@@ -267,6 +270,7 @@ public class Main {
 				
 				System.err.print("Enter number of items: ");
 				numberOfItems= sca.nextInt();
+				count9= count9+ numberOfItems;
 				for(int l=0; l<numberOfItems; l++ ) {
 				System.out.print("Enter product name: ");
 				String productName= sca.next();
@@ -306,6 +310,7 @@ public class Main {
 				 }
 				 writer1.close();
 				
+				
 				 FileOutputStream file = new FileOutputStream("InvoiceSerialize.txt");
 				 ObjectOutputStream out = new ObjectOutputStream(file);
 				 out.writeObject(obj.obj1);
@@ -325,7 +330,7 @@ public class Main {
 			
 			case 4:
 				
-			System.out.println("No of items: "+numberOfItems);
+			System.out.println("No of items: "+count9);
 			System.out.println("No of invoices: "+count3);
 			System.out.println("Total sales: "+total);
 			

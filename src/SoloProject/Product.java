@@ -1,6 +1,9 @@
 package SoloProject;
 
-public class Product {
+import java.io.Serializable;
+
+
+public class Product implements Serializable{
 	
 	private String productName;
 	private int productId;

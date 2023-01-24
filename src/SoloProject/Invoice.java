@@ -1,9 +1,13 @@
 package SoloProject;
 
-public class Invoice {
+import java.io.Serializable;
+import java.util.Scanner;
+
+public class Invoice implements Serializable{
 	
 	Product obj1= new Product();
-	
+	transient Scanner s = new Scanner(System.in); 
+
 	private int invoiceNo;
 	private String customerName;
 	private int phoneNumber;

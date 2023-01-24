@@ -1,0 +1,20 @@
+
+                      ergwer
+Tel: 99999
+Fax: 22222
+Email: errfeer
+Website: erer
+---------------------------------------------
+Invoice NO.11111
+Coustmer Name: awadh
+Phone Number: 99412545
+Date: 24/1/23
+Product Name: a
+Product ID: 111
+Price: 50.0
+quantity: 2
+Product Name: b
+Product ID: 225545
+Price: 60.0
+quantity: 1
+The total peice: 160.0
