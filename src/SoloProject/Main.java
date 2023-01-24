@@ -17,9 +17,19 @@ public class Main {
 		Scanner sca= new Scanner(System.in);
 		Stack<String> myStack= new Stack<>();
 		Stack<String> myStack1= new Stack<>();
+		
 		BufferedWriter writer1 = new BufferedWriter(new FileWriter("Invoice.txt"));
 
 		
+		int count1=0;
+		int count2=0;
+		int count3=0;
+		int count4=0;
+		int count5=0;
+		int count6=0;
+		int count7=0;
+		int count8=0;
+
 		boolean condition =true;
 		while(condition) {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("Data.txt"));
@@ -122,6 +132,7 @@ public class Main {
 				
 			}
 			
+				count1++;
 				break;
 
 			
@@ -228,7 +239,7 @@ public class Main {
 				}
 			
 			}
-			
+				count2++;
 				break;
 
 			
@@ -289,9 +300,9 @@ public class Main {
 
 				}
 				String tot= Double.toString(total);
-				myStack1.push(tot);
+				myStack1.push("The total peice: "+tot);
 				System.out.println("The total peice: "+total);
-				
+				System.out.println("-----------------------------------------------");
 
 				 FileOutputStream file = new FileOutputStream("InvoiceSerialize.txt");
 				 ObjectOutputStream out = new ObjectOutputStream(file);
@@ -299,11 +310,12 @@ public class Main {
 				 out.close();
 				 file.close();
 				 
-			}catch (Exception e) {
+			}catch (IOException e) {
 				System.out.println("Error...");
 				 e.printStackTrace();
 			}
 			
+				count3++;
 				break;
 
 			
@@ -312,6 +324,7 @@ public class Main {
 			case 4:
 			
 			
+				count4++;
 				break;
 
 			
@@ -319,33 +332,45 @@ public class Main {
 			
 			case 5:
 			
+			System.out.println(myStack1);
 			
-			
+			count5++;
 				break;
 
 			
 			case 6:
 			
-			
+				count6++;
 				break;
 
 			
 			
 			case 7:
-			
-			
+				count7++;
+				System.out.println("1. Shop Settings: "+count1);
+				System.out.println("2. Manage Shop Items: "+count2);
+				System.out.println("3. Create New Invoice: "+count3);
+				System.out.println("4. Report: Statistics: "+count4);
+				System.out.println("5. Report: All Invoices: "+count5);
+				System.out.println("6. Search: "+count6);
+				System.out.println("7. Program Statistics: "+count7);
+				System.out.println("8. Exit: "+count8);
+				System.out.println("\n");
+				
 				break;
 
 			
 			
 			case 8:
 				condition= false;
+				count8++;
+		
+			
 				break;
 
 		}
 		
-		
-		
+	
 		
 			for (String list : myStack)
 			 {
