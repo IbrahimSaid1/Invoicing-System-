@@ -1,4 +1,13 @@
 
-a
-1111
-2
+Coustmer Name: IbrahimSaid
+Phone Number: 92599703
+Date: 24/1/2023
+Product Name: Phone
+Product ID: 21521545
+Price: 500.0
+quantity: 2
+Product Name: pc
+Product ID: 24541465
+Price: 600.0
+quantity: 1
+1600.0

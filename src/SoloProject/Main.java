@@ -14,7 +14,6 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 
 		Invoice obj= new Invoice();
-		Product obj1= new Product();
 		Scanner sca= new Scanner(System.in);
 		Stack<String> myStack= new Stack<>();
 		Stack<String> myStack1= new Stack<>();
@@ -148,19 +147,19 @@ public class Main {
 					 for(int j=0; j< no; j++) {
 						 System.out.println("Entert product name: ");
 							String productName= sca.next();
-							obj1.setProductName(productName); 
+							obj.obj1.setProductName(productName); 
 							myStack1.push("Product: "+productName);
 							
 							System.out.println("Entert product ID: ");
 							int productId= sca.nextInt();
-							obj1.setProductId(productId);
+							obj.obj1.setProductId(productId);
 							String id= Integer.toString(productId);
 							myStack1.push("ID: "+id);
 
 
 							System.out.println("Entert product price: ");
 							Double productPrice= sca.nextDouble();
-							obj1.setProductPrice(productPrice);
+							obj.obj1.setProductPrice(productPrice);
 							String price= Double.toString(productPrice);
 							myStack1.push("Price: "+price);
 							
@@ -170,7 +169,7 @@ public class Main {
 					 
 					 FileOutputStream file = new FileOutputStream("Product.txt");
 					 ObjectOutputStream out = new ObjectOutputStream(file);
-					 out.writeObject(obj1);
+					 out.writeObject(obj.obj1);
 					 out.close();
 					 file.close();
 					 
@@ -200,7 +199,7 @@ public class Main {
 					
 					System.out.println("Entert new product price: ");
 					Double productPrice= sca.nextDouble();
-					obj1.setProductPrice(productPrice);
+					obj.obj1 .setProductPrice(productPrice);
 					String newValue= Double.toString(productPrice);
 					myStack1.push("Price: "+newValue);
 					
@@ -240,30 +239,63 @@ public class Main {
 			
 			
 			case 3:
-				
+				Double total=0.0;
 				try {
 				System.out.print("Please enter customer name: ");
 				String customerName= sca.next();
 				obj.setCustomerName(customerName);
-				myStack1.push(customerName);
+				myStack1.push("Coustmer Name: "+customerName);
 				
 				System.out.print("Please enter customer phone number: ");
 				int phoneNumber= sca.nextInt();
 				obj.setPhoneNumber(phoneNumber);
 				String phoneNO= Integer.toString(phoneNumber);
-				myStack1.push(phoneNO);
+				myStack1.push("Phone Number: "+phoneNO);
 
 				System.out.print("Please enter invoice date: ");
-				char invoiceDate= sca.next().charAt(0);
+				String invoiceDate= sca.next();
 				obj.setInvoiceDate(invoiceDate);
-				String date= Character.toString(invoiceDate);
-				myStack1.push(date);
+				myStack1.push("Date: "+invoiceDate);
+				
+				System.err.print("Enter number of items: ");
+				int x= sca.nextInt();
+				for(int l=0; l<x; l++ ) {
+				System.out.print("Enter product name: ");
+				String productName= sca.next();
+				obj.obj1.setProductName(productName);
+				myStack1.push("Product Name: "+productName);
 
+				System.out.print("Enter product ID: ");
+				int productId= sca.nextInt();
+				obj.obj1.setProductId(productId);
+				String proId= Integer.toString(productId);
+				myStack1.push("Product ID: "+proId);
+				
+				System.out.print("Enter product price: ");
+				Double productPrice= sca.nextDouble();
+				obj.obj1.setProductPrice(productPrice);
+				String proPrice= Double.toString(productPrice);
+				myStack1.push("Price: "+proPrice);
+				
+				System.out.print("Enter quantity: ");
+				int quantity= sca.nextInt();
+				obj.obj1.setQuantity(quantity);
+				String quan= Integer.toString(quantity);
+				myStack1.push("quantity: "+quan);
 				
 				
+				total= total+ productPrice*quantity;
+				
+
+				}
+				String tot= Double.toString(total);
+				myStack1.push(tot);
+				System.out.println("The total peice: "+total);
+				
+
 				 FileOutputStream file = new FileOutputStream("InvoiceSerialize.txt");
 				 ObjectOutputStream out = new ObjectOutputStream(file);
-				 out.writeObject(obj1);
+				 out.writeObject(obj.obj1);
 				 out.close();
 				 file.close();
 				 

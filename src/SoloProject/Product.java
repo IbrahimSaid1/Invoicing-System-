@@ -5,7 +5,7 @@ public class Product {
 	private String productName;
 	private int productId;
 	private Double productPrice;
-	
+	private int quantity;
 	
 	public String getProductName() {
 		return productName;
@@ -26,6 +26,12 @@ public class Product {
 	}
 	public void setProductPrice(Double productPrice) {
 		this.productPrice = productPrice;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 

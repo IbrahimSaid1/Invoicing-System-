@@ -6,7 +6,7 @@ public class Invoice {
 	
 	private String customerName;
 	private int phoneNumber;
-	private char invoiceDate;
+	private String invoiceDate;
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -19,10 +19,10 @@ public class Invoice {
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public char getInvoiceDate() {
+	public String getInvoiceDate() {
 		return invoiceDate;
 	}
-	public void setInvoiceDate(char invoiceDate) {
+	public void setInvoiceDate(String invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
 	
