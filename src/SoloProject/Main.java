@@ -14,6 +14,9 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 
 		int invoiceNo = 0;
+		int numberOfItems=0;
+		Double total=0.0;
+
 		Invoice obj= new Invoice();
 		Scanner sca= new Scanner(System.in);
 		Stack<String> myStack= new Stack<>();
@@ -238,7 +241,6 @@ public class Main {
 			
 			
 			case 3:
-				Double total=0.0;
 				try {
 					
 				System.out.print("Please enter invoice NO: ");
@@ -264,8 +266,8 @@ public class Main {
 				myStack1.push("Date: "+invoiceDate);
 				
 				System.err.print("Enter number of items: ");
-				int x= sca.nextInt();
-				for(int l=0; l<x; l++ ) {
+				numberOfItems= sca.nextInt();
+				for(int l=0; l<numberOfItems; l++ ) {
 				System.out.print("Enter product name: ");
 				String productName= sca.next();
 				obj.obj1.setProductName(productName);
@@ -322,7 +324,10 @@ public class Main {
 			
 			
 			case 4:
-			
+				
+			System.out.println("No of items: "+numberOfItems);
+			System.out.println("No of invoices: "+count3);
+			System.out.println("Total sales: "+total);
 			
 				count4++;
 				break;
@@ -376,9 +381,17 @@ public class Main {
 			
 			
 			case 8:
+				
+				System.out.println("Are you sure you want to exit? ");
+				System.out.println("1. YES     2. NO");
+				int q=sca.nextInt();
+				
+				if(q==1) {
+					System.out.println("See You...");
 				condition= false;
+				}
+				
 				count8++;
-		
 			
 				break;
 
