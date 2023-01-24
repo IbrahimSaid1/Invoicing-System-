@@ -13,11 +13,12 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 
-
+		Invoice obj= new Invoice();
 		Product obj1= new Product();
 		Scanner sca= new Scanner(System.in);
 		Stack<String> myStack= new Stack<>();
 		Stack<String> myStack1= new Stack<>();
+		BufferedWriter writer1 = new BufferedWriter(new FileWriter("Invoice.txt"));
 
 		
 		boolean condition =true;
@@ -243,11 +244,29 @@ public class Main {
 				try {
 				System.out.print("Please enter customer name: ");
 				String customerName= sca.next();
+				obj.setCustomerName(customerName);
+				myStack1.push(customerName);
+				
 				System.out.print("Please enter customer phone number: ");
 				int phoneNumber= sca.nextInt();
+				obj.setPhoneNumber(phoneNumber);
+				String phoneNO= Integer.toString(phoneNumber);
+				myStack1.push(phoneNO);
+
 				System.out.print("Please enter invoice date: ");
 				char invoiceDate= sca.next().charAt(0);
+				obj.setInvoiceDate(invoiceDate);
+				String date= Character.toString(invoiceDate);
+				myStack1.push(date);
+
 				
+				
+				 FileOutputStream file = new FileOutputStream("InvoiceSerialize.txt");
+				 ObjectOutputStream out = new ObjectOutputStream(file);
+				 out.writeObject(obj1);
+				 out.close();
+				 file.close();
+				 
 			}catch (Exception e) {
 				System.out.println("Error...");
 				 e.printStackTrace();
@@ -300,8 +319,14 @@ public class Main {
 			 {
 			 writer.write("\n"+list);
 			 }
-			 writer.close();		
-	
+			 writer.close();	
+			 
+			 
+			 for (String list : myStack1)
+			 {
+			 writer1.write("\n"+list);
+			 }
+			 writer1.close();
 		
 		
 	
