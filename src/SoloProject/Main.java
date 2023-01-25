@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -169,12 +170,13 @@ public class Main {
 							myStack.push("Price: "+price);
 							
 						
+						
 					 }
 					 
 					 
 					 FileOutputStream file = new FileOutputStream("ProductSerialize.txt");
 					 ObjectOutputStream out = new ObjectOutputStream(file);
-					 out.writeObject(obj.obj1);
+					 out.writeObject(myStack);
 					 out.close();
 					 file.close();
 					 
@@ -332,7 +334,7 @@ public class Main {
 				
 				 FileOutputStream file = new FileOutputStream("InvoiceSerialize.txt");
 				 ObjectOutputStream out = new ObjectOutputStream(file);
-				 out.writeObject(obj.obj1);
+				 out.writeObject(myStack1);
 				 out.close();
 				 file.close();
 				 
