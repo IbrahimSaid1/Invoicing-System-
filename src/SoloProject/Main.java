@@ -72,7 +72,7 @@ public class Main {
 				
 				
 				case 2:
-					System.out.println("Enter shop name: ");
+					System.out.print("Enter shop name: ");
 					String shopName= sca.next();
 					myStack1.push("                      "+shopName);
 					
@@ -86,24 +86,24 @@ public class Main {
 				case 3:
 					
 					try {
-					System.out.println("Entet tel NO: ");
+					System.out.print("Entet tel NO: ");
 					int telNo= sca.nextInt();
 					String tel= Integer.toString(telNo);
 					myStack1.push("Tel: "+tel);
 					
-					System.out.println("Entet fax NO: ");
+					System.out.print("Entet fax NO: ");
 					int faxNo= sca.nextInt();
 					String fax= Integer.toString(faxNo);
 					myStack1.push("Fax: "+fax);
 					
-					System.out.println("Entet email: ");
+					System.out.print("Entet email: ");
 					String email= sca.next();
 					myStack1.push("Email: "+email);
 					
-					System.out.println("Entet website: ");
+					System.out.print("Entet website: ");
 					String website= sca.next();
 					myStack1.push("Website: "+website);
-					myStack1.push("---------------------------------------------");
+					myStack1.push("-----------------------------------------------");
 					
 					}catch (Exception e) {
 						System.out.println("Error...");
@@ -150,19 +150,19 @@ public class Main {
 					int no= sca.nextInt();
 					
 					 for(int j=0; j< no; j++) {
-						 System.out.println("Entert product name: ");
+						 System.out.print("Entert product name: ");
 							String productName= sca.next();
 							obj.obj1.setProductName(productName); 
 							myStack.push("Product: "+productName);
 							
-							System.out.println("Entert product ID: ");
+							System.out.print("Entert product ID: ");
 							int productId= sca.nextInt();
 							obj.obj1.setProductId(productId);
 							String id= Integer.toString(productId);
 							myStack.push("ID: "+id);
 
 
-							System.out.println("Entert product price: ");
+							System.out.print("Entert product price: ");
 							Double productPrice= sca.nextDouble();
 							obj.obj1.setProductPrice(productPrice);
 							String price= Double.toString(productPrice);
@@ -267,6 +267,7 @@ public class Main {
 				String invoiceDate= sca.next();
 				obj.setInvoiceDate(invoiceDate);
 				myStack1.push("Date: "+invoiceDate);
+				myStack1.push("-----------------------------------------------");
 				
 				System.err.print("Enter number of items: ");
 				numberOfItems= sca.nextInt();
@@ -295,18 +296,36 @@ public class Main {
 				String quan= Integer.toString(quantity);
 				myStack1.push("quantity: "+quan);
 				
-				
 				total= total+ productPrice*quantity;
+				
+			
+				
+				
 				
 				
 				}
+				myStack1.push("-----------------------------------------------");
+				System.out.println("The total price: "+total);
 				String tot= Double.toString(total);
-				myStack1.push("The total peice: "+tot);	
+				myStack1.push("The total price: "+tot);
+				
+				System.out.print("Enter paid amount: ");
+				Double paidAmount= sca.nextDouble();
+				obj.setPaidAmount(paidAmount);
+				String paid= Double.toString(paidAmount);
+				myStack1.push("Paid Amount: "+paid);
+				
+				double balance= total-paidAmount;
+				System.out.println("Balance: "+balance);
+				String bal= Double.toString(balance);
+				myStack1.push("Balance: "+bal);
+				
 				System.out.println("-----------------------------------------------");
-
+				
+				writer1.write("Invoice");
 				 for (String list: myStack1)
 				 {
-				 writer1.write("\n"+list);
+				 writer1.write("\n "+list);
 				 }
 				 writer1.close();
 				
@@ -341,20 +360,25 @@ public class Main {
 			
 			
 			case 5:
-			
-			System.out.println(myStack1);
-			
+				
+				Object[] arr= myStack1.toArray();
+				for(int u=6; u< arr.length; u++) {
+			System.out.println(arr[u]);
+				}
 			count5++;
 				break;
 
 			
 			case 6:
 			try {
+				Object[] arr1= myStack1.toArray();
 				
 				System.out.print("Enter NO of invoice you want to found it: ");
 				int number= sca.nextInt();
 				if(number== invoiceNo) {
-					System.out.println(myStack1);
+					for(int f=6; f< arr1.length; f++) {
+					System.out.println(arr1[f]);
+				}
 				}
 				else {
 					System.out.println("Sorry This Invoice Does Not Found It.");

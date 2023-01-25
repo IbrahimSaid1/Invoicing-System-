@@ -12,6 +12,8 @@ public class Invoice implements Serializable{
 	private String customerName;
 	private int phoneNumber;
 	private String invoiceDate;
+	private Double paidAmount;
+	
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -35,6 +37,12 @@ public class Invoice implements Serializable{
 	}
 	public void setInvoiceNo(int invoiceNo) {
 		this.invoiceNo = invoiceNo;
+	}
+	public Double getPaidAmount() {
+		return paidAmount;
+	}
+	public void setPaidAmount(Double paidAmount) {
+		this.paidAmount = paidAmount;
 	}
 	
 
