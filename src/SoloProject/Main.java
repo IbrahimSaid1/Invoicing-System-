@@ -52,14 +52,34 @@ public class Main {
 		boolean condition =true;
 		while(condition) {
 			
+		
 			
+			
+			
+			System.out.println("1. Shop Settings");
+			System.out.println("2. Manage Shop Items");
+			System.out.println("3. Create New Invoice");
+			System.out.println("4. Report: Statistics");
+			System.out.println("5. Report: All Invoices");
+			System.out.println("6. Search");
+			System.out.println("7. Program Statistics");
+			System.out.println("8. Exit");
+			
+			
+			
+			
+			
+			int a= sca.nextInt();
+			switch (a){
+			
+			case 0:
 			 Connection con = null;
 			 
 			        try {
-			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-			DriverManager.registerDriver(driver);
+			        	Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+			        	DriverManager.registerDriver(driver);
 			            con = DriverManager.getConnection(url, user, pass);
-			 Statement st = con.createStatement();
+			            Statement st = con.createStatement();
 			 
 			 String sql = "CREATE TABLE Shops("
 					 +"Shop_ id INT PRIMARY KEY, "
@@ -81,6 +101,7 @@ public class Main {
 					+"CREATE TABLE Invoices("
 					+"Invoice_No INT PRIMARY KEY,"
 					+"Coustmer_Name VARCHAR(255) NOT NULL,"
+					+"Phone_Number VARCHAR(255) NOT NULL,"
 					+"Invoice_Date VARCHAR(255),"
 					+"NoOf_items INT, "
 					+"Product_id Foriegn key REFERENCES Items(Product_id),"
@@ -88,32 +109,19 @@ public class Main {
 					+"Product_Price DECIMAL(10,2) NOT NULL),"
 					+"Total_Price DECIMAL(10,2)) ";
 			
+			 st.executeUpdate(sql);
+			        
+
 			
+
 			
-					
-			
-			
-			
-			
-			System.out.println("1. Shop Settings");
-			System.out.println("2. Manage Shop Items");
-			System.out.println("3. Create New Invoice");
-			System.out.println("4. Report: Statistics");
-			System.out.println("5. Report: All Invoices");
-			System.out.println("6. Search");
-			System.out.println("7. Program Statistics");
-			System.out.println("8. Exit");
-			
-			int a= sca.nextInt();
-			switch (a){
 		
 			case 1:
 				boolean condition1= true;
 				while(condition1) {
 				System.out.println("1. Load Data");
-				System.out.println("2. Set Shop Name");
-				System.out.println("3. Set Invoice Header");
-				System.out.println("4. Go Back");
+				System.out.println("2. Set Invoice Header");
+				System.out.println("3. Go Back");
 				
 				int b= sca.nextInt();
 				switch (b) {
@@ -127,20 +135,14 @@ public class Main {
 				
 				
 				case 2:
+					
+					try {
 					System.out.print("Enter shop name: ");
 					String shopName= sca.next();
 					myStack1.push("                      "+shopName);
+							
 					
-					break;
-
-				
-				
-				
-				
-				
-				case 3:
 					
-					try {
 					System.out.print("Entet tel NO: ");
 					int telNo= sca.nextInt();
 					String tel= Integer.toString(telNo);
@@ -160,11 +162,17 @@ public class Main {
 					myStack1.push("Website: "+website);
 					myStack1.push("-----------------------------------------------");
 					
+
+					String sql1 = "insert into Shops(Shop_Name, Tel, Fax, Email, Website) values('" + shopName
+		            		+ "','" + tel + "','" + fax + "','" + email +"','" + website+"')";
+					
 					}catch (Exception e) {
 						System.out.println("Error...");
 						 e.printStackTrace();					
 						 }	
 					
+
+					
 					break;
 
 				
@@ -172,11 +180,13 @@ public class Main {
 				
 				
 				
-				case 4:
+				case 3:
 					
 					condition1= false;
 					break;
 
+
+		 
 				}
 				
 			}
@@ -308,6 +318,14 @@ public class Main {
 				obj.setCustomerName(customerName);
 				myStack1.push("Coustmer Name: "+customerName);
 				
+				
+
+				System.out.print("Please enter customer phone number: ");
+				int phoneNumber= sca.nextInt();
+				obj.setPhoneNumber(phoneNumber);
+				String phoneNO= Integer.toString(phoneNumber);
+				myStack1.push("Phone Number: "+phoneNO);
+
 
 				System.out.print("Please enter invoice date: ");
 				String invoiceDate= sca.next();
@@ -458,18 +476,42 @@ public class Main {
 				count8++;
 			
 				break;
-
+				
+				
+				
+		
+				
+				
+				
+			       con.close();
+			} catch (Exception ex) {
+				System.err.println(ex);
+			}
+			       
+			       
+			    
+					
+					
+					}
+		
+		
 		}
+	}
+}
+
+
+				
+
 		
 	
 		
+		     
 		
 			
 	
-		}
 		
-	}
-}
+		
+
 
 
 
