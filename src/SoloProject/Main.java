@@ -55,7 +55,7 @@ public class Main {
 		
 			
 			
-			
+			System.out.println("0. Create Tables");
 			System.out.println("1. Shop Settings");
 			System.out.println("2. Manage Shop Items");
 			System.out.println("3. Create New Invoice");
@@ -66,6 +66,14 @@ public class Main {
 			System.out.println("8. Exit");
 			
 			
+			 Connection con = null;
+			 
+		        try {
+		        	Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+		        	DriverManager.registerDriver(driver);
+		            con = DriverManager.getConnection(url, user, pass);
+		            Statement st = con.createStatement();
+			
 			
 			
 			
@@ -73,47 +81,70 @@ public class Main {
 			switch (a){
 			
 			case 0:
-			 Connection con = null;
-			 
-			        try {
-			        	Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-			        	DriverManager.registerDriver(driver);
-			            con = DriverManager.getConnection(url, user, pass);
-			            Statement st = con.createStatement();
-			 
-			 String sql = "CREATE TABLE Shops("
-					 +"Shop_ id INT PRIMARY KEY, "
-					 +"Shop_Name VARCHAR(255), "
-					 +"Tel VARCHAR(255) NOT NULL,"
-					 +"Fax VARCHAR(255), "
-					 +"Email VARCHAR(255),"
-					 +"Website VARCHAR(255));"
-					 
-					 
-
-					+"CREATE TABLE Items("
-					+"Product_id INT PRIMARY KEY,"
-					+"Product_Name VARCHAR(255), "
-					+"Product_Price DECIMAL(10,2) NOT NULL);"
-					
-					
-			
-					+"CREATE TABLE Invoices("
-					+"Invoice_No INT PRIMARY KEY,"
-					+"Coustmer_Name VARCHAR(255) NOT NULL,"
-					+"Phone_Number VARCHAR(255) NOT NULL,"
-					+"Invoice_Date VARCHAR(255),"
-					+"NoOf_items INT, "
-					+"Product_id Foriegn key REFERENCES Items(Product_id),"
-					+"Product_Name VARCHAR(255),"
-					+"Product_Price DECIMAL(10,2) NOT NULL),"
-					+"Total_Price DECIMAL(10,2)) ";
-			
+		
+//			 
+//			 String sql = "CREATE TABLE Shops("
+//					 +"Shop_ id INT PRIMARY KEY, "
+//					 +"Shop_Name VARCHAR(255), "
+//					 +"Tel VARCHAR(255) NOT NULL,"
+//					 +"Fax VARCHAR(255), "
+//					 +"Email VARCHAR(255),"
+//					 +"Website VARCHAR(255));"
+//					 
+//					 
+//
+//					+"CREATE TABLE Items("
+//					+"Product_id INT PRIMARY KEY,"
+//					+"Product_Name VARCHAR(255), "
+//					+"Product_Price DECIMAL(10,2) NOT NULL);"
+//					
+//					
+//			
+//					+"CREATE TABLE Invoices("
+//					+"Invoice_No INT PRIMARY KEY,"
+//					+"Coustmer_Name VARCHAR(255) NOT NULL,"
+//					+"Phone_Number VARCHAR(255) NOT NULL,"
+//					+"Invoice_Date VARCHAR(255),"
+//					+"NoOf_items INT, "
+//					+"Product_id Foriegn key REFERENCES Items(Product_id),"
+//					+"Product_Name VARCHAR(255),"
+//					+"Product_Price DECIMAL(10,2) NOT NULL),"
+//					+"Total_Price DECIMAL(10,2)) ";
+				
+				
+				
+				String sql= "CREATE TABLE Shops ("
+						 +"Shop_Name VARCHAR(255) PRIMARY KEY,"
+						 +"Email varchar(255) not null,"
+						 +"Tel int, "
+						 +"Fax VARCHAR(255), "
+						 +"Website VARCHAR(255));"
+						 
+						 
+						 +"CREATE TABLE Items("
+						 + "Product_id INT PRIMARY KEY,"
+						 + "Product_Name VARCHAR(255),"
+						 + "Product_Price DECIMAL(10,2));"
+						 
+						 
+			 			 +" CREATE TABLE Invoices ("
+			 			 +"Invoice_No INT PRIMARY KEY,"
+			 			 +"Coustmer_Name VARCHAR(255),"
+			 			 +"Phone_Number INT,"
+			 			 +"Invoice_Date VARCHAR(255),"
+			 			 +"NoOf_items INT, "
+			 			 +"Product_id INT Foreign KEY REFERENCES Items(Product_id),"
+			 			 +"Product_Name VARCHAR(255),"
+			 			 +"Product_Price DECIMAL(10,2) NOT NULL,"
+			 			 +"Total_Price DECIMAL(10,2) ,"
+			 			 +"Paid_Amount DECIMAL(10,2) ,"
+			 			 +"Balance DECIMAL(10,2))";
+	
 			 st.executeUpdate(sql);
 			        
 
 			
-
+			 break;
 			
 		
 			case 1:
@@ -164,8 +195,30 @@ public class Main {
 					
 
 					String sql1 = "insert into Shops(Shop_Name, Tel, Fax, Email, Website) values('" + shopName
-		            		+ "','" + tel + "','" + fax + "','" + email +"','" + website+"')";
+		            		+ "','" + telNo + "','" + faxNo + "','" + email +"','" + website+"')";
 					
+					
+					Integer m = st.executeUpdate(sql1);
+		            
+		 			if (m >= 1) {
+		 				System.out.println("inserted successfully \n" + sql1);
+		 			} else {
+		 				System.out.println("insertion failed");
+		 			}
+		 			
+		 			
+		 			
+		 	        String sql4 = "Select * from Shops";
+		 	        ResultSet resultSet = st.executeQuery(sql4);
+		 	        while (resultSet.next()) {
+		 					System.out.println(resultSet.getString("shopName"));
+		 					System.out.println(resultSet.getString("telNo"));
+		 					System.out.println(resultSet.getString("faxNo"));
+		 					System.out.println(resultSet.getString("email"));
+		 					System.out.println(resultSet.getString("website"));
+		 	        		}
+		 			
+		 			
 					}catch (Exception e) {
 						System.out.println("Error...");
 						 e.printStackTrace();					
@@ -175,9 +228,6 @@ public class Main {
 					
 					break;
 
-				
-				
-				
 				
 				
 				case 3:
@@ -211,10 +261,6 @@ public class Main {
 				case 1:
 					try {
 						
-					System.out.println("Enter number of items: ");
-					int no= sca.nextInt();
-					
-					 for(int j=0; j< no; j++) {
 						 System.out.print("Entert product name: ");
 							String productName= sca.next();
 							obj.obj1.setProductName(productName); 
@@ -233,9 +279,29 @@ public class Main {
 							String price= Double.toString(productPrice);
 							myStack.push("Price: "+price);
 							
+							
+							
+							String sql2 = "insert into Items(Product_id, Product_Name, Product_Price) values('" + productId
+				            		+ "','" + productName + "','" + productPrice + "')";
 						
-						
-					 }
+
+							Integer x = st.executeUpdate(sql2);
+				            
+				 			if ( x >= 1) {
+				 				System.out.println("inserted successfully \n" + sql2);
+				 			} else {
+				 				System.out.println("insertion failed");
+				 			}
+							
+				 			String sql4 = "Select * from Items";
+				 	        ResultSet resultSet = st.executeQuery(sql4);
+				 	        while (resultSet.next()) {
+				 					System.out.println(resultSet.getString("productId"));
+				 					System.out.println(resultSet.getString("productName"));
+				 					System.out.println(resultSet.getString("productPrice"));
+				 	        		}
+				 			
+					 
 					 
 			
 					 
@@ -362,29 +428,52 @@ public class Main {
 				
 				total= total+ productPrice*quantity;
 				
-			
-				
-				
-				
-				
-				}
-				myStack1.push("-----------------------------------------------");
 				System.out.println("The total price: "+total);
-				String tot= Double.toString(total);
-				myStack1.push("The total price: "+tot);
+				
 				
 				System.out.print("Enter paid amount: ");
 				Double paidAmount= sca.nextDouble();
-				obj.setPaidAmount(paidAmount);
-				String paid= Double.toString(paidAmount);
-				myStack1.push("Paid Amount: "+paid);
+				
 				
 				double balance= total-paidAmount;
 				System.out.println("Balance: "+balance);
-				String bal= Double.toString(balance);
-				myStack1.push("Balance: "+bal);
 				
-				System.out.println("-----------------------------------------------");
+				
+				String sql3 = "insert into Invoices(Invoice_No, Coustmer_Name, Phone_Number, Invoice_Date, NoOf_items, Product_id, Product_Name, Product_Price,"
+						+ "Total_Price, Paid_Amount, Balance )"
+						+ "values('" + invoiceNo+ "','" + customerName + "','" + phoneNumber + "','" + invoiceDate + "','" +numberOfItems + "','" + 
+	            		productId + "','" + productName + "','" + productPrice + "','" + total + "','" + paidAmount + "','" + balance + "')";
+			
+				
+
+				Integer z = st.executeUpdate(sql3);
+	            
+	 			if (z >= 1) {
+	 				System.out.println("inserted successfully \n" + sql3);
+	 			} else {
+	 				System.out.println("insertion failed");
+	 			}
+	 			
+	 			
+	 			
+	 			String sql5 = "Select * from Invoices";
+	 	        ResultSet resultSet = st.executeQuery(sql5);
+	 	        while (resultSet.next()) {
+	 					System.out.println(resultSet.getString("invoiceNo"));
+	 					System.out.println(resultSet.getString("customerName"));
+	 					System.out.println(resultSet.getString("phoneNumber"));
+	 					System.out.println(resultSet.getString("invoiceDate"));
+	 					System.out.println(resultSet.getString("numberOfItems"));
+	 					System.out.println(resultSet.getString("productId"));
+	 					System.out.println(resultSet.getString("productName"));
+	 					System.out.println(resultSet.getString("productPrice"));
+	 					System.out.println(resultSet.getString("total"));
+	 				
+	 	        		}
+	 			
+				
+				}
+		
 			
 				
 				
@@ -393,6 +482,7 @@ public class Main {
 				System.out.println("Error...");
 				 e.printStackTrace();
 			}
+				
 			
 				count3++;
 				break;
@@ -481,7 +571,7 @@ public class Main {
 				
 		
 				
-				
+			}	
 				
 			       con.close();
 			} catch (Exception ex) {
@@ -497,7 +587,7 @@ public class Main {
 		
 		}
 	}
-}
+
 
 
 				
