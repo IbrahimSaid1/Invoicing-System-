@@ -6,4 +6,5 @@
  *
  */
 module SoloProject {
+	requires java.sql;
 }
