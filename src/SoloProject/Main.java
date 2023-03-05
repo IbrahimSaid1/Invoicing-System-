@@ -1,9 +1,7 @@
 package SoloProject;
 
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
+import java.sql.*;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
@@ -14,7 +12,20 @@ import java.util.Stack;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		
+		
+		 String url = "jdbc:sqlserver://localhost:1433;" +
+	                "databaseName=Shop;" +
+	                "encrypt=true;" +
+	                "trustServerCertificate=true";
+	        
+	        
+	        String user = "sa";
+	        String pass = "root";
 
+	        
+	        
+	        
 		int invoiceNo = 0;
 		int numberOfItems=0;
 		Double total=0.0;
@@ -25,7 +36,7 @@ public class Main {
 		Stack<String> myStack= new Stack<>();
 		Stack<String> myStack1= new Stack<>();
 		
-		BufferedWriter writer1 = new BufferedWriter(new FileWriter("Invoice.txt"));
+
 
 		
 		int count1=0;
@@ -40,7 +51,50 @@ public class Main {
 		
 		boolean condition =true;
 		while(condition) {
-			BufferedWriter writer = new BufferedWriter(new FileWriter("Product.txt"));
+			
+			
+			 Connection con = null;
+			 
+			        try {
+			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+			DriverManager.registerDriver(driver);
+			            con = DriverManager.getConnection(url, user, pass);
+			 Statement st = con.createStatement();
+			 
+			 String sql = "CREATE TABLE Shops("
+					 +"Shop_ id INT PRIMARY KEY, "
+					 +"Shop_Name VARCHAR(255), "
+					 +"Tel VARCHAR(255) NOT NULL,"
+					 +"Fax VARCHAR(255), "
+					 +"Email VARCHAR(255),"
+					 +"Website VARCHAR(255));"
+					 
+					 
+
+					+"CREATE TABLE Items("
+					+"Product_id INT PRIMARY KEY,"
+					+"Product_Name VARCHAR(255), "
+					+"Product_Price DECIMAL(10,2) NOT NULL);"
+					
+					
+			
+					+"CREATE TABLE Invoices("
+					+"Invoice_No INT PRIMARY KEY,"
+					+"Coustmer_Name VARCHAR(255) NOT NULL,"
+					+"Invoice_Date VARCHAR(255),"
+					+"NoOf_items INT, "
+					+"Product_id Foriegn key REFERENCES Items(Product_id),"
+					+"Product_Name VARCHAR(255),"
+					+"Product_Price DECIMAL(10,2) NOT NULL),"
+					+"Total_Price DECIMAL(10,2)) ";
+			
+			
+			
+					
+			
+			
+			
+			
 			System.out.println("1. Shop Settings");
 			System.out.println("2. Manage Shop Items");
 			System.out.println("3. Create New Invoice");
@@ -173,14 +227,9 @@ public class Main {
 						
 					 }
 					 
+			
 					 
-					 FileOutputStream file = new FileOutputStream("ProductSerialize.txt");
-					 ObjectOutputStream out = new ObjectOutputStream(file);
-					 out.writeObject(myStack);
-					 out.close();
-					 file.close();
-					 
-					}catch (IOException e) {
+					}catch (Exception e) {
 							System.out.println("Error...");
 							 e.printStackTrace();	
 											}
@@ -259,11 +308,6 @@ public class Main {
 				obj.setCustomerName(customerName);
 				myStack1.push("Coustmer Name: "+customerName);
 				
-				System.out.print("Please enter customer phone number: ");
-				int phoneNumber= sca.nextInt();
-				obj.setPhoneNumber(phoneNumber);
-				String phoneNO= Integer.toString(phoneNumber);
-				myStack1.push("Phone Number: "+phoneNO);
 
 				System.out.print("Please enter invoice date: ");
 				String invoiceDate= sca.next();
@@ -323,22 +367,11 @@ public class Main {
 				myStack1.push("Balance: "+bal);
 				
 				System.out.println("-----------------------------------------------");
-				
-				writer1.write("Invoice");
-				 for (String list: myStack1)
-				 {
-				 writer1.write("\n "+list);
-				 }
-				 writer1.close();
+			
 				
 				
-				 FileOutputStream file = new FileOutputStream("InvoiceSerialize.txt");
-				 ObjectOutputStream out = new ObjectOutputStream(file);
-				 out.writeObject(myStack1);
-				 out.close();
-				 file.close();
-				 
-			}catch (IOException e) {
+			
+			}catch (Exception e) {
 				System.out.println("Error...");
 				 e.printStackTrace();
 			}
@@ -431,11 +464,7 @@ public class Main {
 	
 		
 		
-			for (String list : myStack)
-			 {
-			 writer.write("\n"+list);
-			 }
-				writer.close();
+			
 	
 		}
 		
