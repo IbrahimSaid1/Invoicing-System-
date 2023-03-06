@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		
+		try {
 		 String url = "jdbc:sqlserver://localhost:1433;" +
 	                "databaseName=Shop;" +
 	                "encrypt=true;" +
@@ -23,6 +23,7 @@ public class Main {
 	        String user = "sa";
 	        String pass = "root";
 
+	       
 	        
 	        
 	        
@@ -36,7 +37,9 @@ public class Main {
 		Stack<String> myStack= new Stack<>();
 		Stack<String> myStack1= new Stack<>();
 		
-
+		
+		
+	    
 
 		
 		int count1=0;
@@ -49,6 +52,17 @@ public class Main {
 		int count8=0;
 		int count9=0;
 		
+		
+		
+		
+
+		 System.out.print("Enter user: ");
+	     String user1= sca.nextLine();
+	     System.out.print("Enter password: ");
+	     String pass1= sca.nextLine();
+	   
+	     
+	     if (user1.equals(user) && pass1.equals(pass)) { 
 		boolean condition =true;
 		while(condition) {
 			
@@ -65,8 +79,8 @@ public class Main {
 			System.out.println("8. Exit");
 				
 			
-			 Connection con = null;
 			 
+			  Connection con = null;
 		        try {
 		        	Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
 		        	DriverManager.registerDriver(driver);
@@ -557,9 +571,18 @@ public class Main {
 					
 					
 					}
-		
-		
+	     }
+	     
+	     else {
+	    	 System.out.println("Error..");
+	     }
+
+		}catch (Exception e) {
+			System.out.println("Error...");
+			 e.printStackTrace();					
+			 }	
 		}
+		
 	}
 
 
