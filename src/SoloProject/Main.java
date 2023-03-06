@@ -290,22 +290,24 @@ public class Main {
 					int delete= sca.nextInt();
 					String d= "DELETE FROM Items WHERE Product_id= "+delete;					
 					int update= st.executeUpdate(d);
-					myStack.removeElementAt(update);
+					myStack.removeElementAt(delete);
 					
 					break;
 
 					
 					
 				case 3:
-					System.out.print("Enter index number of the price of item you want to change it: ");
-					int itemToChange= sca.nextInt();
-					myStack.removeElementAt(itemToChange);
-					
+					System.out.print("Enter item id you want to change it: ");
+					int change= sca.nextInt();
+						
 					System.out.println("Entert new product price: ");
 					Double productPrice= sca.nextDouble();
 					obj.obj1 .setProductPrice(productPrice);
 					String newValue= Double.toString(productPrice);
 					myStack.push("Price: "+newValue);
+					
+					String ch = "UPDATE Items SET Product_Price = "+ productPrice+ " WHERE Product_id = "+ change ; 
+		            int update1 = st.executeUpdate(ch);
 					
 
 					
