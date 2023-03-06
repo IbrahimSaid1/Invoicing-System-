@@ -54,7 +54,6 @@ public class Main {
 			
 		
 			
-			
 			System.out.println("0. Create Tables");
 			System.out.println("1. Shop Settings");
 			System.out.println("2. Manage Shop Items");
@@ -64,7 +63,7 @@ public class Main {
 			System.out.println("6. Search");
 			System.out.println("7. Program Statistics");
 			System.out.println("8. Exit");
-			
+				
 			
 			 Connection con = null;
 			 
@@ -75,45 +74,16 @@ public class Main {
 		            Statement st = con.createStatement();
 			
 			
-			
-			
+		            
 			int a= sca.nextInt();
+
+
 			switch (a){
 			
 			case 0:
 		
-//			 
-//			 String sql = "CREATE TABLE Shops("
-//					 +"Shop_ id INT PRIMARY KEY, "
-//					 +"Shop_Name VARCHAR(255), "
-//					 +"Tel VARCHAR(255) NOT NULL,"
-//					 +"Fax VARCHAR(255), "
-//					 +"Email VARCHAR(255),"
-//					 +"Website VARCHAR(255));"
-//					 
-//					 
-//
-//					+"CREATE TABLE Items("
-//					+"Product_id INT PRIMARY KEY,"
-//					+"Product_Name VARCHAR(255), "
-//					+"Product_Price DECIMAL(10,2) NOT NULL);"
-//					
-//					
-//			
-//					+"CREATE TABLE Invoices("
-//					+"Invoice_No INT PRIMARY KEY,"
-//					+"Coustmer_Name VARCHAR(255) NOT NULL,"
-//					+"Phone_Number VARCHAR(255) NOT NULL,"
-//					+"Invoice_Date VARCHAR(255),"
-//					+"NoOf_items INT, "
-//					+"Product_id Foriegn key REFERENCES Items(Product_id),"
-//					+"Product_Name VARCHAR(255),"
-//					+"Product_Price DECIMAL(10,2) NOT NULL),"
-//					+"Total_Price DECIMAL(10,2)) ";
 				
-				
-				
-				String sql= "CREATE TABLE Shops ("
+				 String sql= "CREATE TABLE Shops ("
 						 +"Shop_Name VARCHAR(255) PRIMARY KEY,"
 						 +"Email varchar(255) not null,"
 						 +"Tel int, "
@@ -316,9 +286,11 @@ public class Main {
 				
 				case 2:
 				
-					System.out.print("Enter index number of item you want to remove it: ");
+					System.out.print("Enter item id you want to remove it: ");
 					int delete= sca.nextInt();
-					myStack.removeElementAt(delete);
+					String d= "DELETE FROM Items WHERE Product_id= "+delete;					
+					int update= st.executeUpdate(d);
+					myStack.removeElementAt(update);
 					
 					break;
 
@@ -398,21 +370,21 @@ public class Main {
 				obj.setInvoiceDate(invoiceDate);
 				myStack1.push("Date: "+invoiceDate);
 				myStack1.push("-----------------------------------------------");
-				
-				System.err.print("Enter number of items: ");
-				numberOfItems= sca.nextInt();
-				count9= count9+ numberOfItems;
-				for(int l=0; l<numberOfItems; l++ ) {
-				System.out.print("Enter product name: ");
-				String productName= sca.next();
-				obj.obj1.setProductName(productName);
-				myStack1.push("Product Name: "+productName);
+
 
 				System.out.print("Enter product ID: ");
 				int productId= sca.nextInt();
 				obj.obj1.setProductId(productId);
 				String proId= Integer.toString(productId);
 				myStack1.push("Product ID: "+proId);
+				
+				
+
+				System.out.print("Enter product name: ");
+				String productName= sca.next();
+				obj.obj1.setProductName(productName);
+				myStack1.push("Product Name: "+productName);
+				
 				
 				System.out.print("Enter product price: ");
 				Double productPrice= sca.nextDouble();
@@ -472,7 +444,7 @@ public class Main {
 	 	        		}
 	 			
 				
-				}
+				
 		
 			
 				
